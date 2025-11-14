@@ -4,6 +4,8 @@ import * as THREE from 'three'
 //IMPORT OUR ADD DEFAULT MESHES FUNCTION FROM OUR EXTERNAL JS FILE
 import { addDefaultMeshes, addStandardMesh } from './addDefaultMeshes'
 import { addLight } from './addLight'
+import { addBubbleMesh } from './addBubbleMesh'	
+import { addRockMesh } from './addRockMesh'
 
 //SET UP OUR ESSENTIALS SCENE, CAMERA, RENDERER
 const scene = new THREE.Scene()
@@ -42,10 +44,16 @@ function init() {
 	//Lights
 	lights.default = addLight()
 
-	//HERE WE'LL ADD EACH OBJECT TO OUR SCENE AS WELL
-	scene.add(meshes.default)
+	// meshes.textured = addTexturedMesh()
+	meshes.bubble = addBubbleMesh()
+	meshes.rock = addRockMesh()
 
-	scene.add(meshes.standard)
+	//HERE WE'LL ADD EACH OBJECT TO OUR SCENE AS WELL
+	// scene.add(meshes.default)
+	// scene.add(meshes.textured)
+	scene.add(meshes.bubble)
+	scene.add(meshes.rock)
+	// scene.add(meshes.standard)
 	scene.add(lights.default)
 
 	//START OUR ANIMATION LOOP
@@ -54,10 +62,21 @@ function init() {
 
 function animate() {
 	//EVERY FRAME WE UPDATE THE POSITION OF OUR meshes.default, meshes.copy, meshes.copy2
-	meshes.standard.rotation.x += 0.01
-	meshes.standard.rotation.y += 0.01
-	meshes.default.rotation.x -= 0.01
-	meshes.default.rotation.y -= 0.02
+	// meshes.standard.rotation.x += 0.01
+	// meshes.standard.rotation.y += 0.01
+	// meshes.default.rotation.x -= 0.01
+	// meshes.default.rotation.y -= 0.02
+	// meshes.textured.rotation.x += 0.001
+	// meshes.textured.rotation.y += 0.001
+	// meshes.bubble.rotation.x += 0.001
+	// meshes.bubble.rotation.y += 0.001
+	meshes.rock.rotation.x += 0.001
+	meshes.rock.rotation.y += 0.001
+
+	// meshes.textured.material.displacementScale = Math.sin(clock.getElapsedTime()) * 0.3 + 0.3
+	// meshes.bubble.material.displacementScale = Math.sin(clock.getElapsedTime()) * 0.3 + 0.3
+	meshes.rock.material.displacementScale = Math.sin(clock.getElapsedTime()) * 0.3 + 0.3
+	meshes.rock.material.roughness = Math.sin(clock.getElapsedTime()) * 0.3 + 0.3
 	//RE-START THE LOOP
 	requestAnimationFrame(animate)
 

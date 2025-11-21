@@ -6,6 +6,7 @@ import { addDefaultMeshes, addStandardMesh } from './addDefaultMeshes'
 import { addLight } from './addLight'
 import Model from './model'
 import { manager } from './manager'
+import { gsap } from 'gsap'
 
 //SET UP OUR ESSENTIALS SCENE, CAMERA, RENDERER
 const scene = new THREE.Scene()
@@ -53,8 +54,35 @@ function init() {
 	scene.add(lights.default)
 
 	//START OUR ANIMATION LOOP
+	interaction()
 	instances()
 	animate()
+}
+
+function interaction(){
+	const leftButton = document.querySelector('.left')
+	const rightButton = document.querySelector('.right')
+	rightButton.addEventListener('click', () => {
+		gsap.to(meshes.flower.position, {
+			x: 2,
+			duration: 3,
+			ease: 'power2.inOut',
+		})
+		gsap.to(meshes.flower.scale, {
+			x: 2.5,
+			y: 2.5,
+			z: 2.5,
+			duration: 3,
+			ease: 'power2.inOut',
+		})
+	})
+	// leftButton.addEventListener('click', () => {
+	// 	gsap.to(camera.position, {
+	// 		x: -2,
+	// 		duration: 1,
+	// 		ease: 'power2.inOut',
+	// 	})
+	// })
 }
 
 function instances() {
